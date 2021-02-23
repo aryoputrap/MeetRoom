@@ -3,11 +3,11 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {
   Splash,
   GetStarted,
-  //   Register,
   //   Login,
-  Doctor,
-  Messages,
-  Hospitals,
+  Register,
+  Home,
+  Booking,
+  Dasboard,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigator} from '../components';
@@ -18,19 +18,28 @@ const Tab = createBottomTabNavigator();
 const MainApp = () => {
   return (
     <Tab.Navigator tabBar={(props) => <BottomNavigator {...props} />}>
-      <Tab.Screen name="Doctor" component={Doctor} />
-      <Tab.Screen name="Messages" component={Messages} />
-      <Tab.Screen name="Hospitals" component={Hospitals} />
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Booking" component={Booking} />
     </Tab.Navigator>
   );
 };
 
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="Splash">
+    <Stack.Navigator initialRouteName="MainApp">
+      <Stack.Screen
+        name="Dasboard"
+        component={Dasboard}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="Splash"
         component={Splash}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Register"
+        component={Register}
         options={{headerShown: false}}
       />
       <Stack.Screen

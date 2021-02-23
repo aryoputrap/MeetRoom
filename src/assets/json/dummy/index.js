@@ -1,3 +1,3 @@
-import JSONCategoryDoctor from './category-doctor.json';
+import JSONCard from './Card.json';
 
-export {JSONCategoryDoctor};
+export {JSONCard};
