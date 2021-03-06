@@ -1,32 +1,59 @@
 import React from 'react';
 import {
   StyleSheet,
-  Text,
+  // Text,
+  ScrollView,
   View,
   // Image,
   //   ImageBackground,
   //   TouchableOpacity,
 } from 'react-native';
+import {Calender} from '../../components';
 // import {GradientGre/en} from '../../assets';
 // import {GradientRed} from '../../assets';
 // import {Agenda} from '../../components';
 // import {COLORS} from '../../utils';
+// import DropDownPicker from 'react-native-dropdown-picker';
 
 const Splash = ({navigation}) => {
   return (
-    <View style={styles.container}>
-      <Text>Booking</Text>
-    </View>
+    <ScrollView style={styles.container}>
+      <View style={styles.calender}>
+        <Calender />
+      </View>
+      {/* <View>
+        <DropDownPicker
+          items={[
+            {label: 'Item 1', value: 'item1'},
+            {label: 'Item 2', value: 'item2', selected: true},
+          ]}
+          defaultValue="item1"
+          containerStyle={{height: 40}}
+          style={{backgroundColor: 'red'}}
+          dropDownStyle={{backgroundColor: '#fafafa'}}
+          onChangeItem={(item) => console.log(item.label, item.value)}
+        />
+      </View> */}
+      <View style={styles.padding} />
+    </ScrollView>
   );
 };
 
 export default Splash;
 
 const styles = StyleSheet.create({
+  // padding {
+  // },
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    // flex: 1,
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    marginBottom: 20,
+  },
+  calender: {
+    padding: 30,
+    // width: '50%',
+    // height: '50%',
   },
   row: {
     flexDirection: 'row',

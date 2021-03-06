@@ -10,13 +10,21 @@ import HomeProfile from './HomeProfile';
 // import ProfileItem from './ProfileItem';
 import Loading from './Loading';
 import Agenda from './Agenda';
+import Calender from './Calender';
+import Room from './Room';
+import RoomFree from './RoomFree';
+import Time from './Time';
 
 export {
+  Time,
   Header,
+  Calender,
   Card,
   BottomNavigator,
   HomeProfile,
   Agenda,
+  Room,
+  RoomFree,
   // DoctorCategory,
   // NewsItem,
   // List,

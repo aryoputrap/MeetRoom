@@ -6,8 +6,9 @@ import {
   //   Login,
   Register,
   Home,
-  Booking,
+  // Booking,
   Dasboard,
+  ListBook,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigator} from '../components';
@@ -19,14 +20,15 @@ const MainApp = () => {
   return (
     <Tab.Navigator tabBar={(props) => <BottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Booking" component={Booking} />
+      <Tab.Screen name="ListBook" component={ListBook} />
+      {/* <Tab.Screen name="Booking" component={Booking} /> */}
     </Tab.Navigator>
   );
 };
 
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="MainApp">
+    <Stack.Navigator initialRouteName="Dasboard">
       <Stack.Screen
         name="Dasboard"
         component={Dasboard}

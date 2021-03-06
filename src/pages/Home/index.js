@@ -1,211 +1,283 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+/* eslint-disable no-lone-blocks */
+import React, {useState} from 'react';
 import {
-  StyleSheet,
   Text,
   View,
-  ScrollView,
+  Modal,
   // Image,
-  //   ImageBackground,
+  // ImageBackground,
+  Alert,
+  ScrollView,
   TouchableOpacity,
 } from 'react-native';
-// import CardView from 'react-native-cardview';
-// import {GradientGre/en} from '../../assets';
-import {JSONCard} from '../../assets';
-import {Button} from '../../components';
+// import {GradientGreen} from '../../assets';
+// import {GradientRed} from '../../assets';
+import {Gap, Room, RoomFree, Input} from '../../components';
+// import TimePicker from 'react-native-24h-timepicker';
 // import {COLORS} from '../../utils';
+import DropDownPicker from 'react-native-dropdown-picker';
+import {Default, Styles} from '../style';
+import {Calendar} from 'react-native-calendars';
 
-const Splash = ({navigation}) => {
-  // const data = JSONCard.data;
+const Home = () => {
+  const [selected, setSelected] = useState('');
+  const [selectedRoom, setSelectedRoom] = useState(0);
+  const [selectedEnd, setEnd] = useState(0);
+  const [modalVisible, setModalVisible] = useState(false);
 
-  const renderData = (data) => {
-    if (data.length === 0) {
-      return (
-        <Text style={{textAlign: 'center', padding: 10, color: 'black'}}>
-          Data Empty
-        </Text>
-      );
-    }
-    return data.map((item) => {
-      return (
-        <View
-          key={item.id}
-          style={{
-            alignItems: 'center',
-            flexDirection: 'row',
-            padding: 10,
-            justifyContent: 'space-between',
+  const modalHeader = (
+    <View style={Styles.modalHeader}>
+      <Text style={Styles.title}>SETTING MEETING ROOM 2</Text>
+      <View style={Styles.divider} />
+    </View>
+  );
+
+  const modalBody = (
+    <View style={Styles.modalBody}>
+      <Input
+        label="PIC"
+        placeholder="Please enter your name"
+        // value={form.email}
+        // onChangeText={value => setForm('email', value)}
+      />
+      <Gap height={10} />
+      <View style={Default.row}>
+        <DropDownPicker
+          items={[
+            {label: '07:00', value: '07:00'},
+            {label: '07:30', value: '07:30'},
+            {label: '08:00', value: '08:00'},
+            {label: '08:30', value: '08:30'},
+            {label: '09:00', value: '09:00'},
+            {label: '09:30', value: '09:30'},
+            {label: '10:00', value: '10:00'},
+          ]}
+          placeholder="Select Start"
+          // defaultValue=""
+          containerStyle={Default.drop2}
+          style={{backgroundColor: 'white'}}
+          dropDownStyle={{backgroundColor: 'white'}}
+          // onChangeItem={(item) => console.log(item.label, item.value)}
+          onChangeItem={(item) => setSelectedRoom(item.value)}
+        />
+        <Gap width={20} />
+        <DropDownPicker
+          items={[
+            {label: '07:00', value: '07:00'},
+            {label: '07:30', value: '07:30'},
+            {label: '08:00', value: '08:00'},
+            {label: '08:30', value: '08:30'},
+            {label: '09:00', value: '09:00'},
+            {label: '09:30', value: '09:30'},
+            {label: '10:00', value: '10:00'},
+          ]}
+          placeholder="Select End"
+          // defaultValue=""
+          containerStyle={Default.drop2}
+          style={{backgroundColor: 'white'}}
+          dropDownStyle={{backgroundColor: 'white'}}
+          // onChangeItem={(item) => console.log(item.label, item.value)}
+          onChangeItem={(item) => setEnd(item.value)}
+        />
+      </View>
+      <View style={Default.row}>
+        <View style={[Default.row, Styles.boDate]}>
+          <Text>{selected}</Text>
+          <Gap width={10} />
+        </View>
+        <Gap width={10} />
+        <View style={[Default.row, Styles.boDate]}>
+          <Text>{selectedRoom}</Text>
+          <Gap width={10} />
+          <Text>-</Text>
+          <Gap width={10} />
+          <Text>{selectedEnd}</Text>
+        </View>
+      </View>
+
+      <View style={{flexDirection: 'row-reverse', marginTop: 30}}>
+        <TouchableOpacity
+          style={{...Styles.actions, backgroundColor: '#db2828'}}
+          onPress={() => {
+            setModalVisible(!modalVisible);
           }}>
-          <View style={styles.name}>
-            <Text>{item.name}</Text>
-          </View>
-          <View style={styles.row3}>
-            <Text>{item.booking}</Text>
-            <Text>-</Text>
-            <Text>{item.endBooking}</Text>
-          </View>
-          <View style={styles.row2}>
-            <TouchableOpacity
-              style={styles.btnUpdate}
-              onPress={() => this.deleteData(item.id)}>
-              <Text>Update</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.btnDelete}
-              onPress={() => this.deleteData(item.id)}>
-              <Text>Delete</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      );
-    });
+          <Text style={Styles.actionText}>No</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            setModalVisible(false);
+          }}
+          style={{...Styles.actions, backgroundColor: '#21ba45'}}>
+          <Text style={Styles.actionText}>Yes</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+
+  const modalContainer = (
+    <View style={Styles.modalContainer}>
+      {modalHeader}
+      {modalBody}
+    </View>
+  );
+
+  const modal = (
+    <Modal
+      transparent={false}
+      visible={modalVisible}
+      onRequestClose={() => {
+        Alert.alert('Modal haS been closed.');
+      }}>
+      <View style={Styles.modal}>
+        <View>{modalContainer}</View>
+      </View>
+    </Modal>
+  );
+  // const [showMarkedDatesExamples, setShowMarkedDatesExamples] = useState(false);
+
+  // const toggleSwitch = () => {
+  //   setShowMarkedDatesExamples(!showMarkedDatesExamples);
+  // };
+
+  const onDayPress = (day) => {
+    setSelected(day.dateString);
+    console.log(day);
   };
+
+  // const getDisabledDates = (startDate, endDate, daysToDisable) => {
+  //   const disabledDates = {};
+  //   const start = moment(startDate);
+  //   const end = moment(endDate);
+
+  //   for (let m = moment(start); m.diff(end, 'days') <= 0; m.add(1, 'days')) {
+  //     if (_.includes(daysToDisable, m.weekday())) {
+  //       disabledDates[m.format('YYYY-MM-DD')] = {disabled: true};
+  //     }
+  //   }
+  //   return disabledDates;
+  // };
+
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.bo}>
-        <Text style={styles.whiteText}>Monday, 22 February 2021</Text>
-        <Text style={styles.whiteText}>BOOKING SCHEDULE</Text>
-      </View>
-      <View style={styles.row}>
-        <View style={styles.card}>
-          <View style={styles.titleView}>
-            <Text style={styles.title}> ROOM 1</Text>
+    <View style={Default.flex2}>
+      {modal}
+      <View style={Default.row}>
+        <View style={Default.calenderx}>
+          <Gap height={20} />
+          <Text style={Styles.textDatehome}>Date</Text>
+          <Gap height={20} />
+          <Calendar
+            onDayPress={onDayPress}
+            markedDates={{
+              [selected]: {
+                selected: true,
+                disableTouchEvent: true,
+                selectedColor: 'red',
+                selectedTextColor: 'white',
+              },
+            }}
+          />
+        </View>
+        <View style={[Default.flex1, Default.alignContent]}>
+          <Gap height={20} />
+          <Text style={Styles.textBig}>Schedule</Text>
+          <View style={Styles.scHorizontal}>
+            <ScrollView horizontal={true}>
+              <TouchableOpacity style={[Default.row, Styles.btnTime]}>
+                <Text>07:00 - 07:30</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[Default.row, Styles.btnTime]}>
+                <Text>08:00 - 08:30</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[Default.row, Styles.btnTime]}>
+                <Text>08:00 - 08:30</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[Default.row, Styles.btnTime]}>
+                <Text>08:00 - 08:30</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[Default.row, Styles.btnTime]}>
+                <Text>08:00 - 08:30</Text>
+              </TouchableOpacity>
+            </ScrollView>
           </View>
-          {/* <View>{renderData(JSONCard.data)}</View> */}
+          <ScrollView style={Styles.scRoom}>
+            <View style={Default.row}>
+              <Room
+                room={'ROOM 1'}
+                name={'Mr Joko'}
+                time={'07:00'}
+                endtime={'07:30'}
+              />
+              <RoomFree
+                room={'ROOM 2'}
+                onPress={() => {
+                  setModalVisible(true);
+                }}
+              />
+            </View>
+            <View style={Default.row}>
+              <RoomFree
+                room={'ROOM 3'}
+                onPress={() => {
+                  setModalVisible(true);
+                }}
+              />
+              <RoomFree
+                room={'ROOM 4'}
+                onPress={() => {
+                  setModalVisible(true);
+                }}
+              />
+            </View>
+            <View style={Default.row}>
+              <Room
+                room={'ROOM 5'}
+                name={'Mr Joko'}
+                time={'07:00'}
+                endtime={'07:30'}
+              />
+              <RoomFree
+                room={'ROOM 6'}
+                onPress={() => {
+                  setModalVisible(true);
+                }}
+              />
+            </View>
+            <View style={Default.row}>
+              <RoomFree
+                room={'ROOM 7'}
+                onPress={() => {
+                  setModalVisible(true);
+                }}
+              />
+            </View>
+          </ScrollView>
         </View>
       </View>
-      <Button title="Sign In" onPress={() => navigation.replace('MainApp')} />
-    </ScrollView>
+    </View>
   );
 };
 
-export default Splash;
+export default Home;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginBottom: 50,
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
-  bo: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: '10%',
-    borderBottomRightRadius: 30,
-    borderBottomLeftRadius: 30,
-    backgroundColor: 'blue',
-  },
-  sc: {
-    width: '100%',
-    height: '30%',
-  },
-  btnUpdate: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'yellow',
-    borderRadius: 10,
-    marginRight: 10,
-    width: 70,
-    height: 30,
-  },
-  btnDelete: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'red',
-    borderRadius: 10,
-    marginRight: 10,
-    width: 70,
-    height: 30,
-  },
-  card: {
-    backgroundColor: 'white',
-    margin: 20,
-    borderRadius: 10,
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    // flex: 2,
-  },
-  row2: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginLeft: 30,
-  },
-  row3: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginLeft: 30,
-    width: 90,
-  },
-  dasboardBO: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    // flex: 1,
-    // borderWidth: 1,
-  },
-  dasboardBO2: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 30,
-    paddingBottom: 40,
-  },
-  dasboardDate: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-  },
-  name: {
-    width: 100,
-  },
-  textDate: {
-    textAlign: 'center',
-    marginBottom: 40,
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  textBO: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  textWell: {
-    fontSize: 17,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  textWell2: {
-    fontSize: 15,
-    fontWeight: '100',
-    color: 'white',
-  },
-  btnPlus: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 30,
-    borderRadius: 100,
-    opacity: 0.5,
-    backgroundColor: 'rgba(52, 52, 52, 0.8)',
-    width: 100,
-    height: 100,
-  },
-  viewBtn: {
-    paddingBottom: 20,
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
-  plus: {
-    fontSize: 90,
-    color: 'white',
-    marginBottom: 10,
-  },
-  whiteText: {
-    color: 'white',
-    fontSize: 20,
-  },
-});
+{
+  /* <View style={Styles.btnBookPic}>
+            <View style={Styles.titleViewPic}>
+              <Text style={Styles.title}> ROOM 1</Text>
+            </View>
+            <View style={Styles.pic}>
+              <Text style={Styles.namePic}>Mr Joko</Text>
+              <Text style={Styles.timePic}>07:00 - 08:30</Text>
+            </View>
+          </View> */
+}
+{
+  /* <TouchableOpacity style={Styles.btnBook}>
+            <View style={Styles.titleView}>
+              <Text style={Styles.title}> ROOM 2</Text>
+            </View>
+            <View style={Styles.pic}>
+              <IconAddPhoto />
+            </View>
+          </TouchableOpacity> */
+}

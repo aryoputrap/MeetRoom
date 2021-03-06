@@ -4,85 +4,100 @@
             "id": 1,
             "name": "Mr Supriatna",
             "booking": "07:00",
-            "endBooking": "07:30"
+            "endBooking": "07:30",
+            "room": "Room 1"
         },
         {
             "id": 2,
             "name": "Mrs Angela",
             "booking": "07:30",
-            "endBooking": "08:30"
+            "endBooking": "08:30",
+            "room": "Room 1"
         },
         {
             "id": 3,
             "name": "Mr Joko",
-            "booking": "09:00",
-            "endBooking": "09:30"
+            "booking": "07:00",
+            "endBooking": "08:30",
+            "room": "Room 1"
         },
         {
             "id": 4,
             "name": "Mr Sapto",
             "booking": "07:00",
-            "endBooking": "07:30"
+            "endBooking": "07:30",
+            "room": "Room 2"
         },
         {
             "id": 5,
             "name": "Mrs Angela",
             "booking": "07:00",
-            "endBooking": "07:30"
+            "endBooking": "07:30",
+            "room": "Room 7"
         },
         {
             "id": 6,
             "name": "Mrs Angel",
             "booking": "07:00",
-            "endBooking": "07:30"
+            "endBooking": "07:30",
+            "room": "Room 4"
+
         },
         {
             "id": 7,
             "name": "Mr Suyatno",
             "booking": "07:00",
-            "endBooking": "07:30"
+            "endBooking": "07:30",
+            "room": "Room 3"
         },
         {
             "id": 8,
             "name": "Mr Sapto",
             "booking": "07:00",
-            "endBooking": "07:30"
+            "endBooking": "07:30",
+            "room": "Room 6"
         },
         {
             "id": 9,
             "name": "Mrs Lili",
             "booking": "07:00",
-            "endBooking": "07:30"
+            "endBooking": "07:30",
+            "room": "Room 7"
         },
         {
             "id": 10,
             "name": "Mrs Ratna",
             "booking": "07:00",
-            "endBooking": "07:30"
+            "endBooking": "07:30",
+            "room": "Room 2"
         },
         {
             "id": 11,
             "name": "Mr Adi",
             "booking": "07:00",
-            "endBooking": "07:30"
+            "endBooking": "07:30",
+            "room": "Room 7"
         },
         {
             "id": 12,
             "name": "Mrs Lili",
             "booking": "07:00",
-            "endBooking": "07:30"
+            "endBooking": "07:30",
+            "room": "Room 4"
         },
         {
             "id": 13,
             "name": "Mrs Ratna",
             "booking": "07:00",
-            "endBooking": "07:30"
+            "endBooking": "07:30",
+            "room": "Room 6"
         },
         {
             "id": 14,
             "name": "Mr Ari",
             "booking": "07:00",
-            "endBooking": "07:30"
+            "endBooking": "07:30",
+            "room": "Room 5"
         }
     ]
 }
